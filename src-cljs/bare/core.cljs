@@ -1,3 +1,3 @@
 (ns bare.core)
 
-(console/log (+ 2 2))
+(js/console.log (+ 1000 1000))

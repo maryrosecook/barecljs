@@ -6,6 +6,10 @@
   :plugins [[lein-cljsbuild "0.3.4"]]
   :cljsbuild {
               :builds [{:source-paths ["src-cljs"]
-                        :compiler {:output-to "js/main.js"
+                        :compiler {:output-to "js/node/main.js"
                                    :optimizations :simple
+                                   :pretty-print true}}
+                       {:source-paths ["src-cljs"]
+                        :compiler {:output-to "js/browser/main.js"
+                                   :optimizations :whitespace
                                    :pretty-print true}}]})

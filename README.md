@@ -8,23 +8,23 @@
 
 #### Manually
 
-Download the script
+Download the script.
 
     $ curl https://raw.github.com/technomancy/leiningen/stable/bin/lein > ~/bin/lein
 
-Check ~/.bin is in your path by running
+Check ~/.bin is in your path by running:
 
     $ echo $PATH
 
-Set the lein script to be executable
+Set the lein script to be executable.
 
     $ chmod 755 ~/bin/lein
 
-Install
+Install.
 
     $ lein
 
-Check it works
+Check it works.
 
     $ lein repl
     $ (+ 2 2)
@@ -35,48 +35,57 @@ Follow the instructions at http://www.java.com/en/download/help/index_installing
 
 ### Make a simple ClojureScript project
 
-Make this directory structure
+Make this directory structure:
 
     barecljs/
-      src-cljs/
+      src/
         bare/
-          bare.cljs
+          core.cljs
       project.clj
 
-Make these files
+Make these files:
 
 project.clj
 
     (defproject barecljs "0.1.0"
-      :source-paths ["src-clj"]
       :dependencies [[org.clojure/clojure "1.5.1"]
-                     [org.clojure/clojurescript "0.0-1859"
-                     :exclusions [org.apache.ant/ant]]]
+                     [org.clojure/clojurescript "0.0-1934"
+                      :exclusions [org.apache.ant/ant]]]
+      :source-paths ["src"]
+
       :plugins [[lein-cljsbuild "0.3.4"]]
-      :cljsbuild {
-                  :builds [{:source-paths ["src-cljs"]
-                            :compiler {:output-to "js/main.js"
-                                       :optimizations :simple
-                                       :pretty-print true}}]})
+
+      :cljsbuild
+      {:builds
+       [{:id "dev"
+         :source-paths ["src"]
+         :compiler {:output-to "out/browser/main.js"
+                    :output-dir "out/browser"
+                    :optimizations :none}}
+        {:id "node"
+         :source-paths ["src"]
+         :compiler {:output-to "out/node/main.js"
+                    :optimizations :simple
+                    :pretty-print true}}] })
 
 bare.cljs
 
-    (ns example.core)
-    (console/log (+ 2 2))
+    (ns bare.core)
+    (js/console.log (+ 2 2))
 
-Install the dependencies for the example project
+Install the dependencies for the example project.
 
 Installs the jars required to run the project into a local jar folder.
 
     $ lein deps
 
-Compile cljs code to JS, save to disk. If cljs changes, recompiles automatically.
+Compile cljs code to JS. If the cljs changes it will be recompiled automatically.
 
     $ lein cljsbuild auto
 
-Open js/main.js and check it has `2 + 2` on the last line
+Open `out/node/main.js` and check it has `console.log(4);` on the last line
 
-Change the cljs code `(+ 2 2)` to something else, save, check that the JS changes
+Change the cljs code `(+ 2 2)` to something else, save and check that the JS changes.
 
 ### Run your JS code
 
@@ -95,4 +104,10 @@ Go to [nodejs.org](http://nodejs.org) and click the Install button
 ##### Run the JS
 
     $ cd barecljs
-    $ node js/main.js
+    $ node out/node/main.js
+
+#### Browser
+
+##### Run the JS
+
+Open `index.html` in your browser.  Open the browser console.

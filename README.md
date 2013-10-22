@@ -68,7 +68,7 @@ project.clj
                     :optimizations :simple
                     :pretty-print true}}] })
 
-bare.cljs
+core.cljs
 
     (ns bare.core)
     (js/console.log (+ 2 2))

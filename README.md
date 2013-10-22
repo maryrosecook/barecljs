@@ -110,4 +110,14 @@ Go to [nodejs.org](http://nodejs.org) and click the Install button
 
 ##### Run the JS
 
+In the root of your project, make an `index.html` file that will load your JS code
+
+    <html>
+        <body>
+            <script src="out/browser/goog/base.js" type="text/javascript"></script>
+            <script src="out/browser/main.js" type="text/javascript"></script>
+            <script type="text/javascript">goog.require("bare.core");</script>
+        </body>
+    </html>
+
 Open `index.html` in your browser.  Open the browser console.

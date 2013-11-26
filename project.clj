@@ -1,10 +1,10 @@
 (defproject barecljs "0.1.0"
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-1934"
+                 [org.clojure/clojurescript "0.0-2014"
                   :exclusions [org.apache.ant/ant]]]
   :source-paths ["src"]
 
-  :plugins [[lein-cljsbuild "0.3.4"]]
+  :plugins [[lein-cljsbuild "1.0.0-alpha1"]]
 
   :cljsbuild
   {:builds
